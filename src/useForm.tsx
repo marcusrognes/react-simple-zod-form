@@ -3,7 +3,7 @@ import { FormEvent, useState } from 'react';
 import { getDataFromSubmit } from './getDataFromSubmit';
 
 export function useForm<T extends ZodRawShape>(
-	schema: z.ZodObject<T>,
+	schema: z.ZodObject<T> | z.ZodEffects<z.ZodObject<T>>,
 	onSubmit: (data: z.output<z.ZodObject<T>>) => void | Promise<void>
 ) {
 	const [errors, setErrors] = useState<{ [key: string]: string } | null>(

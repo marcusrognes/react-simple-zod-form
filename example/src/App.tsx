@@ -6,15 +6,20 @@ import { z } from 'zod';
 import { useForm } from '../../src';
 import { ReactNode } from 'react';
 
-const Form01Schema = z.object({
-	test: z.string().min(1),
-	test2: z.string(),
-	test3: z.string().min(2).max(4),
-	email: z.string().email(),
-	complex: z.object({
-		nested: z.string().min(4),
-	}),
-});
+const Form01Schema = z
+	.object({
+		test: z.string().min(1),
+		test2: z.string(),
+		test3: z.string().min(2).max(4),
+		email: z.string().email(),
+		complex: z.object({
+			nested: z.string().min(4),
+		}),
+	})
+	.refine(data => data.test !== data.test2, {
+		message: 'Passwords does match',
+		path: ['test2'],
+	});
 
 function App() {
 	const { onSubmit, errors, handlerError } = useForm(Form01Schema, data => {

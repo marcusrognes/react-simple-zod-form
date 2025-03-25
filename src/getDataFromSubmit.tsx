@@ -3,7 +3,7 @@ import dot from 'dot-object';
 
 export function getDataFromSubmit<T extends ZodRawShape>(
 	form: EventTarget | HTMLFormElement,
-	schema: z.ZodObject<T>
+	schema: z.ZodObject<T> | z.ZodEffects<z.ZodObject<T>>
 ) {
 	const formData = new FormData(form as HTMLFormElement);
 	const flattenedData: { [key: string]: any } = {};
