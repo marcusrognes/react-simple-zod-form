@@ -16,7 +16,6 @@ Simple example
 import { useForm } from 'react-simple-zod-form';
 import { z } from 'zod';
 
-
 const MyFormSchema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
@@ -24,7 +23,6 @@ const MyFormSchema = z.object({
         avatarUrl: z.string()
     }),
 });
-
 
 function MyPage(){
     const { onSubmit, errors, handlerError } = useForm(MyFormSchema, (data) => {
@@ -34,10 +32,11 @@ function MyPage(){
 
     return <div>
         <form onSubmit={onSubmit}>
+            {handlerError && <p className="red">{handlerError}</p>}
             <Input name="name" label="Name" error={errors?.name}/>
             <Input name="email" label="Email" error={errors?.email}/>
             <Input name="profile.avatarUrl" label="Avatar Url" error={errors?.["profile.avatarUrl"]}/>
-
+            <button type="submit">Submit</button>
         </form>
     </div>;
 }
