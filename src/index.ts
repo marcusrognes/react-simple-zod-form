@@ -1,2 +1,2 @@
-export * from "./getDataFromSubmit";
-export * from "./useForm";
+export * from './getDataFromSubmit';
+export * from './useForm';
